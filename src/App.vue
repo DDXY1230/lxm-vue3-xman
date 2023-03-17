@@ -1,16 +1,13 @@
 <!--  -->
 <script setup>
-import {ref,reactive,h, defineCustomElement} from 'vue'
-import customVueCeVue from './components/custom-vue.ce.vue'
-const Btn = defineCustomElement(customVueCeVue)
-window.customElements.define('lxm-mm', Btn)
-const obj = {
-  habby: 'coding'
-}
+import {ref,reactive} from 'vue'
+import {useTestStore} from './store'
+const test = useTestStore()
+
 </script>
 <template>
 <div class=''>
-  <lxm-mm :obj="JSON.stringify(obj)"></lxm-mm>
+{{ test.current }}-- {{ test.name }}
 </div>
 </template>
 
