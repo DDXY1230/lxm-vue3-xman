@@ -12,5 +12,8 @@ export const useTestStore = defineStore(Names.TEST, {
   },
   actions: {
     // 同步异步都可以做
+    setCurrent(val:number) {
+      this.current = val
+    }
   }
 })
