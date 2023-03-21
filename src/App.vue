@@ -1,33 +1,26 @@
 <!--  -->
 <script setup>
 import { ref, reactive } from "vue";
-import { useTestStore } from "./store";
-import { storeToRefs } from "pinia";
-const Test = useTestStore();
-const { current, name } = storeToRefs(Test); // storeToRefs用这个包裹就有相应式了
-const change = () => {
-  Test.setCurrent(8899);
+const event = "click";
+const num = ref(1);
+const handle = () => {
+  console.log("您点击了一个按钮");
+  num.value++;
 };
-// 数据发生变化了触发
-// Test.$subscribe((args, state) => {
-//   console.log('==>1', args)
-//   console.log('==>2', state)
-// },{datached: true,deep:true,flush: 'post'})
-Test.$onAction(args => {
-  console.log(args);
-  args.after(() => {
-    console.log("这个始终最后执行");
-  });
-},true); // true表示销毁了继续坚挺$onAction
 </script>
 <template>
   <div class=''>
-    {{ Test.current }}-- {{ Test.name }}
-    <hr>
-    解构出来的值不具有相应式 storeToRefs用这个包裹就有相应式了{{ current}}==={{  name }}
-    <button @click="change">+</button>
+    <p v-once>v-once修饰的只渲染一次{{ num }}</p>
+    <p>{{ num }}</p>
+    <button @[event].stop="handle">点击</button>
+    <ul>
+      <li v-for="item in arr" :key="item" v-memo="[item == 2]"></li>
+    </ul>
   </div>
 </template>
 
 <style lang='scss' scoped>
 </style>
+// .stop阻止冒泡
+// v-memo一般配合v-for使用
+// 
