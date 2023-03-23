@@ -1,3 +1,4 @@
+<!-- 瀑布流组件 -->
 <template>
   <div class="wraps">
     <div
@@ -7,7 +8,8 @@
         top: item.top + 'px',
         left: item.left + 'px',
       }"
-      v-for="item in waterList"
+      v-for="(item,i) in waterList"
+      :key="i"
       class="items"
     ></div>
   </div>

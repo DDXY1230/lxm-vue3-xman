@@ -1,6 +1,6 @@
 <!--  -->
 <script setup lang="ts">
-import child from './child.vue'
+import child from './child2.vue'
 import {ref} from 'vue'
 const getChildValue = (value) => {
   console.log(value)
