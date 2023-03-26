@@ -5,8 +5,9 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import { createPinia, PiniaPluginContext } from 'pinia'
 import Loading from './components/Loading'
+import { MyUse } from './myUse'
 const store = createPinia()
-const app = createApp(App)
+export const app = createApp(App)
 // 做一个下类型声明
 type Lod = {
   show: () => void,
@@ -65,5 +66,6 @@ store.use(piniaPlugin({
 }))
 app.use(ElementPlus)
 app.use(store)
-app.use(Loading)
+// app.use(Loading)
+MyUse(Loading) // 试一试自己手写实现的
 app.mount('#app')
