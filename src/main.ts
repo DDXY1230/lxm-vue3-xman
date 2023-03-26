@@ -4,8 +4,37 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import { createPinia, PiniaPluginContext } from 'pinia'
+import Loading from './components/Loading'
 const store = createPinia()
 const app = createApp(App)
+// 做一个下类型声明
+type Lod = {
+  show: () => void,
+  hide: () => void
+}
+declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    $loading: Lod
+  }
+}
+//-------------注册全局函数和变量-----------------
+app.config.globalProperties.$env = 'dev'    // 定义全局函数和全局变量
+app.config.globalProperties.$filters = {
+  format<T>(str: T) {
+    return `小田螺-${str}`
+  }
+}   
+type Filter = {
+  format<T>(str: T): string,
+
+}
+declare module 'vue' {
+  export interface ComponentCustomProperties {
+    $filters: Filter,
+    $env: string
+  }
+}
+//-------------注册全局函数和变量-----------------
 
 const setStore = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value))
@@ -36,4 +65,5 @@ store.use(piniaPlugin({
 }))
 app.use(ElementPlus)
 app.use(store)
+app.use(Loading)
 app.mount('#app')

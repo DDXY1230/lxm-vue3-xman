@@ -1,6 +1,7 @@
 <!--  -->
 <script setup>
 import child from './components/child.vue'
+
 </script>
 <template>
 <div class=''>

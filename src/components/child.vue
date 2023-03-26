@@ -1,28 +1,24 @@
-<!-- 指令简写 鉴权 -->
-<script setup lang="ts">
-import {ref} from 'vue'
-import type {Directive} from 'vue'
-const isShow = ref(false)
-localStorage.setItem('userId', 'xtl-zm')
-const permission = [
-  'xtl-zm:shop:create',
-  'xtl-zm:shop:edit',
-  'xtl-zm:shop:delete',
-]
-const userId = localStorage.getItem('userId') as string
-console.log('userId',userId)
-const vHasShow:Directive<HTMLElement,string> = (el,bingding) => {
-  console.log(el,bingding)
-  if(!permission.includes(userId + ':' + bingding.value)){
-    el.style.display = 'none'
-  }
-}
+<!--  -->
+<script setup lang='ts'>
+import {ref,reactive,getCurrentInstance} from 'vue'
+const instance = getCurrentInstance()
+instance?.proxy?.$loading.show()
+setTimeout(() => {
+instance?.proxy?.$loading.hide()
+},5000)
 </script>
 <template>
 <div class=''>
-  <button v-has-show="'shop:create'">创建</button>
-  <button v-has-show="'shop:edit'">编辑</button>
-  <button v-has-show="'shop:delete'">删除</button>
+  {{ $filters.format('苹果手机') }}
+  使用自定义组件显示出一个loading
+   <el-row class="mb-4">
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
+  </el-row>
 </div>
 </template>
 
